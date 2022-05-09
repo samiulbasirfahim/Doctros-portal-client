@@ -4,10 +4,11 @@ import BannerCard from "./BannerCard"
 import clock from "../../assets/icons/clock.svg"
 import marker from "../../assets/icons/marker.svg"
 import phone from "../../assets/icons/phone.svg"
+import Services from "./Services"
 
 const Home = () => {
 	return (
-		<section className="container mx-auto">
+		<section className="container px-[25px] mx-auto">
 			<Banner />
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 				<BannerCard
@@ -29,6 +30,7 @@ const Home = () => {
 					bg="bg-gradient-to-l from-primary to-secondary"
 				></BannerCard>
 			</div>
+			<Services />
 		</section>
 	)
 }
