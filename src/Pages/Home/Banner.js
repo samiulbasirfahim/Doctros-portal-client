@@ -1,6 +1,6 @@
 import React from "react"
-import chair from "../assets/images/chair.png"
-import ButtonPrimary from "../Components/ButtonPrimary"
+import chair from "../../assets/images/chair.png"
+import ButtonPrimary from "../../Components/ButtonPrimary"
 
 const Banner = () => {
 	return (
@@ -9,7 +9,8 @@ const Banner = () => {
 				<div class="hero-content flex-col lg:flex-row-reverse">
 					<img
 						src={chair}
-						class="lg:max-w-lg rounded-lg shadow-2xl"
+
+						class={`lg:max-w-lg rounded-lg shadow-2xl`}
 						alt=""
 					/>
 					<div>
