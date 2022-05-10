@@ -3,7 +3,7 @@ import bg from "../../assets/images/footer.png"
 
 const Footer = () => {
 	return (
-		<section style={{ background: `url(${bg})`, backgroundPosition:'center' }}>
+		<section style={{ background: `url(${bg})`, backgroundPosition:'center', marginTop:'64px' }}>
 			<footer class="footer p-10 container mx-auto">
 				<div>
 					<span class="footer-title">Services</span>
