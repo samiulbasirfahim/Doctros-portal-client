@@ -15,8 +15,7 @@ module.exports = {
 					"base-100": "#ffffff",
 				},
 			},
-
-			"cupcake",
+			"business",
 		],
 	},
 }

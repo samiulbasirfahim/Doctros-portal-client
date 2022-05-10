@@ -1,7 +1,8 @@
 import React, { useState } from "react"
-import {  NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom"
+import { FaSun, FaMoon } from "react-icons/fa"
 
-const Navbar = () => {
+const Navbar = ({ handleThemeChange, theme }) => {
 	const [menuOpen, setMenuOpen] = useState(false)
 	const navItems = (
 		<>
@@ -64,6 +65,14 @@ const Navbar = () => {
 				>
 					Contact Us
 				</NavLink>
+			</li>
+			<li>
+				<button
+					onClick={handleThemeChange}
+					class="rounded-2xl lg:mx-2 font-bold"
+				>
+					{theme ? <FaMoon /> : <FaSun />}
+				</button>
 			</li>
 			<li>
 				<NavLink
