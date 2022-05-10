@@ -7,7 +7,7 @@ const Banner = () => {
 	return (
 		<section>
 			<div
-				className="hero min-h-screen bg-cover bg-center bg-blend-overlay"
+				className="hero min-h-screen bg-cover bg-center bg-blend-overlay pt-[100px`]"
 				style={{
 					background: `url(${bannerBg})`,
 				}}
