@@ -8,7 +8,7 @@ const Banner = () => {
 	return (
 		<section>
 			<div
-				className="hero min-h-screen bg-cover bg-center bg-blend-overlay"
+				className="hero min-h-screen bg-cover bg-center bg-blend-overlay mt-[64px]"
 				style={{
 					background: `url(${bannerBg})`,
 				}}
@@ -16,7 +16,7 @@ const Banner = () => {
 				<div class="hero-content flex-col lg:flex-row-reverse">
 					<img
 						src={chair}
-						class={`lg:max-w-lg rounded-lg shadow-2xl`}
+						class={`lg:max-w-lg rounded-lg`}
 						alt=""
 					/>
 					<div>

@@ -6,6 +6,7 @@ import marker from "../../assets/icons/marker.svg"
 import phone from "../../assets/icons/phone.svg"
 import Services from "./Services"
 import Appoinments from "./Appoinments"
+import Testimonials from "./Testimonials"
 
 const Home = () => {
 	return (
@@ -35,6 +36,7 @@ const Home = () => {
 				<Services />
 			</section>
 			<Appoinments />
+			<Testimonials />
 		</>
 	)
 }

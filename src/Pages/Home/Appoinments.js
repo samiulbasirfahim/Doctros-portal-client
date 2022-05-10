@@ -10,7 +10,7 @@ const Appoinments = () => {
 				background: `url(${appoinmentsbg})`,
 			}}
 		>
-			<div className=" flex mt-40 flex-col lg:flex-row justify-center items-center px-6">
+			<div className=" flex mt-40 flex-col lg:flex-row justify-center items-center px-6 mx-auto container">
 				<div className="flex-1 hidden lg:flex justify-end">
 					<img
 						className="mt-[-200px]"

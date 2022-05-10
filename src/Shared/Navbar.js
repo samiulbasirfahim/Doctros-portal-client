@@ -7,7 +7,9 @@ const Navbar = () => {
 			<li>
 				<NavLink
 					className={({ isActive }) =>
-						isActive && "bg-accent text-white"
+						isActive
+							? "bg-accent text-white rounded-2xl"
+							: "rounded-2xl lg:mx-2"
 					}
 					to="/"
 				>
@@ -17,7 +19,9 @@ const Navbar = () => {
 			<li>
 				<NavLink
 					className={({ isActive }) =>
-						isActive && "bg-accent text-white"
+						isActive
+							? "bg-accent text-white rounded-2xl"
+							: "rounded-2xl lg:mx-2"
 					}
 					to="/about"
 				>
@@ -27,7 +31,9 @@ const Navbar = () => {
 			<li>
 				<NavLink
 					className={({ isActive }) =>
-						isActive && "bg-accent text-white"
+						isActive
+							? "bg-accent text-white rounded-2xl"
+							: "rounded-2xl lg:mx-2"
 					}
 					to="/appointment"
 				>
@@ -37,7 +43,9 @@ const Navbar = () => {
 			<li>
 				<NavLink
 					className={({ isActive }) =>
-						isActive && "bg-accent text-white"
+						isActive
+							? "bg-accent text-white rounded-2xl"
+							: "rounded-2xl lg:mx-2"
 					}
 					to="/reviews"
 				>
@@ -47,7 +55,9 @@ const Navbar = () => {
 			<li>
 				<NavLink
 					className={({ isActive }) =>
-						isActive && "bg-accent text-white"
+						isActive
+							? "bg-accent text-white rounded-2xl"
+							: "rounded-2xl lg:mx-2"
 					}
 					to="/contact-us"
 				>
@@ -57,7 +67,9 @@ const Navbar = () => {
 			<li>
 				<NavLink
 					className={({ isActive }) =>
-						isActive && "bg-accent text-white"
+						isActive
+							? "bg-accent text-white rounded-2xl"
+							: "rounded-2xl lg:mx-2"
 					}
 					to="/login"
 				>
@@ -67,40 +79,49 @@ const Navbar = () => {
 		</>
 	)
 	return (
-		<div class="navbar justify-between bg-base-100 container mx-auto">
-			<div class="navbar-start">
-				<div class="dropdown">
-					<label tabindex="0" class="btn btn-ghost lg:hidden">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-5 w-5"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M4 6h16M4 12h8m-8 6h16"
-							/>
-						</svg>
-					</label>
-					<ul
-						tabindex="0"
-						class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 "
-					>
+		<section className="flex justify-center">
+			<div class="drawer fixed top-0 z-50">
+				<input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+				<div class="drawer-content flex flex-col h-[64px] backdrop-blur-[8px] bg-gray-400/50">
+					<div class="w-full navbar container  mx-auto">
+						<div class="flex-none lg:hidden">
+							<label
+								for="my-drawer-3"
+								class="btn btn-square btn-ghost"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									class="inline-block w-6 h-6 stroke-current"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M4 6h16M4 12h16M4 18h16"
+									></path>
+								</svg>
+							</label>
+						</div>
+						<div class="flex-1 px-2 mx-2">
+							<p className="font-bold text-center lg:text-left lg:w-auto w-full text-2xl">
+								Doctors Portal
+							</p>
+						</div>
+						<div class="flex-none hidden lg:block">
+							<ul class="menu menu-horizontal font-bold">{navItems}</ul>
+						</div>
+					</div>
+				</div>
+				<div class="drawer-side">
+					<label for="my-drawer-3" class="drawer-overlay"></label>
+					<ul class="menu p-4 overflow-y-auto w-80 bg-base-100 font-bold">
 						{navItems}
 					</ul>
 				</div>
-				<Link to="/" class="btn btn-ghost normal-case text-xl font-bold">
-					Doctors Portal
-				</Link>
 			</div>
-			<div class="navbar-center hidden lg:flex ">
-				<ul class="menu menu-horizontal p-0 font-semibold">{navItems}</ul>
-			</div>
-		</div>
+		</section>
 	)
 }
 
