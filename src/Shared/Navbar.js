@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 
 const Navbar = () => {
+	const [menuOpen, setMenuOpen] = useState(false)
+	console.log(menuOpen)
 	const navItems = (
 		<>
 			<li>
@@ -80,14 +82,15 @@ const Navbar = () => {
 	)
 	return (
 		<section className="flex justify-center">
-			<div class="drawer fixed top-0 z-50">
-				<input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-				<div class="drawer-content flex flex-col h-[64px] backdrop-blur-[8px] bg-gray-400/50">
+			<div class="fixed top-0 w-full z-50">
+				<input type="checkbox" class="drawer-toggle" />
+				<div class="drawer-content flex flex-col h-[64px] backdrop-blur-[18px] bg-gray-400/80">
 					<div class="w-full navbar container  mx-auto">
 						<div class="flex-none lg:hidden">
 							<label
 								for="my-drawer-3"
 								class="btn btn-square btn-ghost"
+								onClick={() => setMenuOpen(!menuOpen)}
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -110,13 +113,19 @@ const Navbar = () => {
 							</p>
 						</div>
 						<div class="flex-none hidden lg:block">
-							<ul class="menu menu-horizontal font-bold">{navItems}</ul>
+							<ul class="menu menu-horizontal font-bold">
+								{navItems}
+							</ul>
 						</div>
 					</div>
 				</div>
-				<div class="drawer-side">
+				<div
+					className={`absolute duration-300 ease-linear ${
+						menuOpen ? "left-0" : "left-[-100vh]"
+					}`}
+				>
 					<label for="my-drawer-3" class="drawer-overlay"></label>
-					<ul class="menu p-4 overflow-y-auto w-80 bg-base-100 font-bold">
+					<ul class="menu p-4 overflow-y-auto w-80 font-bold h-screen  backdrop-blur-[18px] bg-gray-400/80">
 						{navItems}
 					</ul>
 				</div>

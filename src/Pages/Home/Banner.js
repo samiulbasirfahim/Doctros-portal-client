@@ -16,7 +16,7 @@ const Banner = () => {
 				<div class="hero-content flex-col lg:flex-row-reverse">
 					<img
 						src={chair}
-						class={`lg:max-w-lg rounded-lg`}
+						class={`lg:max-w-lg max-w-xs rounded-lg`}
 						alt=""
 					/>
 					<div>

@@ -12,3 +12,7 @@
 body {
 	overflow-x: hidden;
 }
+
+.z-top{
+	z-index: 500000000000000000000;
+}
