@@ -7,7 +7,7 @@ const ContactForm = () => {
 			style={{
 				background: `url(${bg})`,
 			}}
-			className="py-32"
+			className="py-32 mt-36"
 		>
 			<form className="grid justify-items-center gap-6">
 				<p className="text-secondary font-semibold text-xl">Contact Us</p>
