@@ -7,6 +7,7 @@ import phone from "../../assets/icons/phone.svg"
 import Services from "./Services"
 import Appoinments from "./Appoinments"
 import Testimonials from "./Testimonials"
+import ContactForm from "./Contact-Form"
 
 const Home = () => {
 	return (
@@ -37,6 +38,7 @@ const Home = () => {
 			</section>
 			<Appoinments />
 			<Testimonials />
+			<ContactForm />
 		</>
 	)
 }
