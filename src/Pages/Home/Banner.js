@@ -1,14 +1,13 @@
 import React from "react"
 import chair from "../../assets/images/chair.png"
 import ButtonPrimary from "../../Components/ButtonPrimary"
-// import bannerBg from "../../assets/images/bg.png"
 import bannerBg from "../../assets/images/bg.png"
 
 const Banner = () => {
 	return (
 		<section>
 			<div
-				className="hero min-h-screen bg-cover bg-center bg-blend-overlay mt-[64px]"
+				className="hero min-h-screen bg-cover bg-center bg-blend-overlay"
 				style={{
 					background: `url(${bannerBg})`,
 				}}
