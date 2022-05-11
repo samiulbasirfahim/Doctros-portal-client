@@ -1,7 +1,6 @@
 import React from "react"
 
 const BannerCard = ({ img, title, description, bg }) => {
-	console.log(img)
 	return (
 		<div
 			className={

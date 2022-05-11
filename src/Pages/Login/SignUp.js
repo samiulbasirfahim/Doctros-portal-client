@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 import SocialLogin from "./SocialLogin"
 
-const Login = () => {
+const SignUp = () => {
 	const [showPass, setShowPass] = useState(false)
 	const {
 		register,
@@ -11,9 +11,7 @@ const Login = () => {
 		watch,
 		formState: { errors },
 	} = useForm()
-	const onSubmit = (data) => {
-		
-	}
+	const onSubmit = (data) => console.log(data, errors)
 	return (
 		<div className="min-h-screen w-screen flex justify-center items-center">
 			<div className="shadow-2xl py-12 px-8 rounded-2xl lg:w-3/12 ">
@@ -22,7 +20,25 @@ const Login = () => {
 					onSubmit={handleSubmit(onSubmit)}
 				>
 					<p className="text-center w-full pb-8 font-bold text-xl">
-						Login
+						Sign Up
+					</p>
+					<p className="flex flex-col">
+						<label htmlFor="email">Full name</label>
+						<input
+							type="text"
+							name="name"
+							id="name"
+							class="input input-bordered w-full"
+							{...register("name", {
+								required: {
+									value: true,
+									message: "Please input your name",
+								},
+							})}
+						/>
+						<p className="text-red-700">
+							<small>{errors?.name?.message}</small>
+						</p>
 					</p>
 					<p className="flex flex-col">
 						<label htmlFor="email">Email</label>
@@ -70,15 +86,17 @@ const Login = () => {
 							<small>{errors?.password?.message}</small>
 						</p>
 					</p>
-					<Link to="/reset-password" className="text-xs">
-						Forget password ?
-					</Link>
-					<input type="submit" value="Login" className="btn w-full" />
+
+					<input
+						type="submit"
+						value="Sign Up"
+						className="btn w-full"
+					/>
 				</form>
 				<p className="text-sm text-center mt-2">
-					New to doctors portal ?
-					<Link to="/sign-up" className="text-sm text-secondary ml-2">
-						Create new account
+					Already have an account ?
+					<Link to="/login" className="text-sm text-secondary ml-2">
+						Please login
 					</Link>
 				</p>
 				<div class="divider mt-4">OR</div>
@@ -88,4 +106,4 @@ const Login = () => {
 	)
 }
 
-export default Login
+export default SignUp

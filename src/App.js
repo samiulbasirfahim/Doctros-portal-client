@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom"
 import Appointments from "./Pages/Appointments/Appointments"
 import Home from "./Pages/Home/Home"
 import Login from "./Pages/Login/Login"
+import SignUp from "./Pages/Login/SignUp"
 import Footer from "./Shared/Footer"
 import Navbar from "./Shared/Navbar"
 
@@ -24,6 +25,7 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/appointment" element={<Appointments />} />
 				<Route path="/login" element={<Login />} />
+				<Route path="/sign-up" element={<SignUp />} />
 			</Routes>
 			<Footer />
 
