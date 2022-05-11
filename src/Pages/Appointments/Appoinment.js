@@ -21,7 +21,7 @@ const Appoinment = ({ service: { name, slots }, setModalService, service }) => {
 					disabled={!slots.length > 0}
 					htmlFor="my-modal-6"
 					onClick={() => setModalService(service)}
-					className="btn btn-primary bg-gradient-to-l from-primary to-secondary text-white"
+					className="btn btn-md btn-primary bg-gradient-to-l from-primary to-secondary text-white"
 				>
 					{slots.length === 0 ? 'not available' : 'Book now'}
 				</label>

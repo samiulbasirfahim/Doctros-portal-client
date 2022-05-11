@@ -13,7 +13,7 @@ const AvailableAppointments = ({ date }) => {
 	}, [])
 	return (
 		<section>
-			<p className="text-secondary text-center text-xl my-10">
+			<p className="text-secondary text-center lg:text-xl text-sm my-10">
 				Available Appointments on {format(date, "PP")}
 			</p>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
