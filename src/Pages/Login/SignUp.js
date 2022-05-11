@@ -1,19 +1,42 @@
 import React, { useState } from "react"
+import {
+	useAuthState,
+	useCreateUserWithEmailAndPassword,
+	useUpdateProfile,
+} from "react-firebase-hooks/auth"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import Spinner from "../../Components/Spinner"
+import auth from "../../firebase.init"
 import SocialLogin from "./SocialLogin"
 
 const SignUp = () => {
 	const [showPass, setShowPass] = useState(false)
+	const [createUserWithEmailAndPassword,  , loading, error] =
+		useCreateUserWithEmailAndPassword(auth)
+	const [updateProfile, updating] = useUpdateProfile(auth)
 	const {
 		register,
 		handleSubmit,
-		watch,
 		formState: { errors },
 	} = useForm()
-	const onSubmit = (data) => console.log(data, errors)
+	const onSubmit = (data) => {
+		createUserWithEmailAndPassword(data.email, data.password).then(() => {
+			updateProfile({ displayName: data.name })
+		})
+	}
+
+	const [user] = useAuthState(auth)
+	const location = useLocation()
+	const from = location?.state?.from || "/"
+	const navigate = useNavigate()
+	if (user) {
+		navigate(from, { replace: true })
+	}
 	return (
 		<div className="min-h-screen w-screen flex justify-center items-center">
+			{updating && <Spinner />}
+			{loading && <Spinner />}
 			<div className="shadow-2xl py-12 px-8 rounded-2xl lg:w-3/12 ">
 				<form
 					className="grid grid-cols-1 gap-y-4"
@@ -92,10 +115,13 @@ const SignUp = () => {
 						value="Sign Up"
 						className="btn w-full"
 					/>
+					<p className="text-red-500 w-full text-center text-xs">
+						{error?.code}
+					</p>
 				</form>
 				<p className="text-sm text-center mt-2">
 					Already have an account ?
-					<Link to="/login" className="text-sm text-secondary ml-2">
+					<Link to="/login" state={from} className="text-sm text-secondary ml-2">
 						Please login
 					</Link>
 				</p>

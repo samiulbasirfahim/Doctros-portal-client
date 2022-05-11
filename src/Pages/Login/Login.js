@@ -1,21 +1,38 @@
 import React, { useState } from "react"
+import { useAuthState } from "react-firebase-hooks/auth"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import auth from "../../firebase.init"
 import SocialLogin from "./SocialLogin"
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth"
+import Spinner from "../../Components/Spinner"
 
 const Login = () => {
 	const [showPass, setShowPass] = useState(false)
+
+	const [signInWithEmailAndPassword, , loading, error] =
+		useSignInWithEmailAndPassword(auth)
+
 	const {
 		register,
 		handleSubmit,
-		watch,
 		formState: { errors },
 	} = useForm()
 	const onSubmit = (data) => {
-		
+		signInWithEmailAndPassword(data.email, data.password)
 	}
+
+	const [user] = useAuthState(auth)
+	const location = useLocation()
+	const from = location?.state?.from || "/"
+	const navigate = useNavigate()
+	if (user) {
+		navigate(from, { replace: true })
+	}
+
 	return (
 		<div className="min-h-screen w-screen flex justify-center items-center">
+			{loading && <Spinner />}
 			<div className="shadow-2xl py-12 px-8 rounded-2xl lg:w-3/12 ">
 				<form
 					className="grid grid-cols-1 gap-y-4"
@@ -70,14 +87,21 @@ const Login = () => {
 							<small>{errors?.password?.message}</small>
 						</p>
 					</p>
-					<Link to="/reset-password" className="text-xs">
+					<Link to="/reset-password" className="text-xs text-secondary">
 						Forget password ?
 					</Link>
 					<input type="submit" value="Login" className="btn w-full" />
+					<p className="text-red-500 w-full text-center text-xs">
+						{error?.code}
+					</p>
 				</form>
 				<p className="text-sm text-center mt-2">
 					New to doctors portal ?
-					<Link to="/sign-up" className="text-sm text-secondary ml-2">
+					<Link
+						to="/sign-up"
+						state={from}
+						className="text-sm text-secondary ml-2"
+					>
 						Create new account
 					</Link>
 				</p>

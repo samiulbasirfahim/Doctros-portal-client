@@ -1,8 +1,13 @@
 import React, { useState } from "react"
 import { NavLink } from "react-router-dom"
 import { FaSun, FaMoon } from "react-icons/fa"
+import auth from "../firebase.init"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { signOut } from "firebase/auth"
 
 const Navbar = ({ handleThemeChange, theme }) => {
+	const [user] = useAuthState(auth)
+	console.log(user);
 	const [menuOpen, setMenuOpen] = useState(false)
 	const navItems = (
 		<>
@@ -75,16 +80,20 @@ const Navbar = ({ handleThemeChange, theme }) => {
 				</button>
 			</li>
 			<li>
-				<NavLink
-					className={({ isActive }) =>
-						isActive
-							? "bg-accent text-white rounded-2xl"
-							: "rounded-2xl lg:mx-2"
-					}
-					to="/login"
-				>
-					Login
-				</NavLink>
+				{user ? (
+					<button className="rounded-2xl lg:mx-2 font-bold" onClick={() => signOut(auth)}>Sign out</button>
+				) : (
+					<NavLink
+						className={({ isActive }) =>
+							isActive
+								? "bg-accent text-white rounded-2xl"
+								: "rounded-2xl lg:mx-2"
+						}
+						to="/login"
+					>
+						Login
+					</NavLink>
+				)}
 			</li>
 		</>
 	)
@@ -132,7 +141,10 @@ const Navbar = ({ handleThemeChange, theme }) => {
 						menuOpen ? "left-0" : "left-[-100vh]"
 					}`}
 				>
-					<label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+					<label
+						htmlFor="my-drawer-3"
+						className="drawer-overlay"
+					></label>
 					<ul className="menu p-4 overflow-y-auto w-80 font-bold h-screen  backdrop-blur-[18px] bg-gray-800/60 dark:bg-red-800">
 						{navItems}
 					</ul>
