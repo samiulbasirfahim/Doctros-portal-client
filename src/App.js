@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { Route, Routes } from "react-router-dom"
+import Appointments from "./Pages/Appointments/Appointments"
 import Home from "./Pages/Home/Home"
+import Footer from "./Shared/Footer"
 import Navbar from "./Shared/Navbar"
 
 function App() {
@@ -19,7 +21,10 @@ function App() {
 			<Navbar handleThemeChange={handleThemeChange} theme={theme} />
 			<Routes>
 				<Route path="/" element={<Home />} />
+				<Route path="/appointment" element={<Appointments />} />
 			</Routes>
+			<Footer />
+
 		</section>
 	)
 }

@@ -8,7 +8,6 @@ import Services from "./Services"
 import Appoinments from "./Appoinments"
 import Testimonials from "./Testimonials"
 import ContactForm from "./Contact-Form"
-import Footer from "../../Shared/Footer"
 
 const Home = () => {
 	return (
@@ -40,7 +39,6 @@ const Home = () => {
 			<Appoinments />
 			<Testimonials />
 			<ContactForm />
-			<Footer />
 
 		</>
 	)
