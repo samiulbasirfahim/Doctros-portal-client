@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import AnimatedCursor from "react-animated-cursor"
 import { Toaster } from "react-hot-toast"
 import { Route, Routes } from "react-router-dom"
 import Appointments from "./Pages/Appointments/Appointments"
@@ -22,6 +23,7 @@ function App() {
 
 	return (
 		<section data-theme={theme && "dark"}>
+			 <AnimatedCursor />
 			<Navbar handleThemeChange={handleThemeChange} theme={theme} />
 			<Routes>
 				<Route path="/" element={<Home />} />
