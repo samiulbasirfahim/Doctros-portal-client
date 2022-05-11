@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Toaster } from "react-hot-toast"
 import { Route, Routes } from "react-router-dom"
 import Appointments from "./Pages/Appointments/Appointments"
 import Home from "./Pages/Home/Home"
@@ -30,7 +31,7 @@ function App() {
 				<Route path="/reset-password" element={<ResetPassword />} />
 			</Routes>
 			<Footer />
-
+		<Toaster/>
 		</section>
 	)
 }

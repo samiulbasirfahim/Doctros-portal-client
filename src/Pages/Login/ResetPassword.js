@@ -1,20 +1,37 @@
-import React from "react"
-import { useAuthState } from "react-firebase-hooks/auth"
+import { sendPasswordResetEmail } from "firebase/auth"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 import { Link, useLocation } from "react-router-dom"
+import Spinner from "../../Components/Spinner"
 import auth from "../../firebase.init"
 
 const ResetPassword = () => {
 	const location = useLocation()
 	const from = location?.state?.from || "/"
+	const [error, setError] = useState()
+	const [sending, setSending] = useState(null)
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm()
-	const onSubmit = (data) => {}
+	const onSubmit = (data) => {
+		setSending(true)
+		sendPasswordResetEmail(auth, data.email)
+			.then(() => {
+				setSending(false)
+				toast.success("Password reset email sent successfully")
+			})
+			.catch((error) => {
+				console.log(error.code)
+				setError(error.code)
+				setSending(false)
+			})
+	}
 	return (
 		<div className="min-h-screen w-screen flex justify-center items-center">
+			{sending && <Spinner />}
 			<div className="shadow-2xl py-12 px-8 rounded-2xl lg:w-3/12 ">
 				<form
 					className="grid grid-cols-1 gap-y-4"
@@ -43,7 +60,7 @@ const ResetPassword = () => {
 							})}
 						/>
 						<p className="text-red-700">
-							<small>{errors?.email?.message}</small>
+							<small>{error?.email?.message}</small>
 						</p>
 					</p>
 					<input
@@ -51,7 +68,9 @@ const ResetPassword = () => {
 						value="Reset email"
 						className="btn w-full"
 					/>
-					<p className="text-red-500 w-full text-center text-xs"></p>
+					<p className="text-red-500 w-full text-center text-xs">
+						{error}
+					</p>
 				</form>
 				<p className="text-sm text-center mt-2">
 					Remember your password ?

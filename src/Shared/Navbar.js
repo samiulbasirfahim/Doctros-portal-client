@@ -1,13 +1,20 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { FaSun, FaMoon } from "react-icons/fa"
 import auth from "../firebase.init"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { signOut } from "firebase/auth"
+import { useScrollTracker } from "react-scroll-tracker"
 
 const Navbar = ({ handleThemeChange, theme }) => {
 	const [user] = useAuthState(auth)
-	console.log(user);
+	const { scrollY: scrollYT } = useScrollTracker()
+
+	const [scrollY, setScrollY] = useState()
+	console.log(scrollY)
+	useEffect(() => {
+		setScrollY(window.scrollY)
+	}, [scrollYT])
 	const [menuOpen, setMenuOpen] = useState(false)
 	const navItems = (
 		<>
@@ -81,7 +88,12 @@ const Navbar = ({ handleThemeChange, theme }) => {
 			</li>
 			<li>
 				{user ? (
-					<button className="rounded-2xl lg:mx-2 font-bold" onClick={() => signOut(auth)}>Sign out</button>
+					<button
+						className="rounded-2xl lg:mx-2 font-bold"
+						onClick={() => signOut(auth)}
+					>
+						Sign out
+					</button>
 				) : (
 					<NavLink
 						className={({ isActive }) =>
@@ -98,10 +110,14 @@ const Navbar = ({ handleThemeChange, theme }) => {
 		</>
 	)
 	return (
-		<section className="flex justify-center">
+		<section className="flex justify-center mb-8">
 			<div className="fixed top-0 w-full z-50">
 				<input type="checkbox" className="drawer-toggle" />
-				<div className="drawer-content flex flex-col h-[64px] backdrop-blur-[18px] bg-gray-800/60">
+				<div
+					className={`drawer-content flex flex-col h-[64px] backdrop-blur-[18px] bg-gray-800/60  ${
+						scrollY < 300 && "lg:bg-transparent"
+					}`}
+				>
 					<div className="w-full navbar container  mx-auto">
 						<div className="flex-none lg:hidden">
 							<label
@@ -138,14 +154,14 @@ const Navbar = ({ handleThemeChange, theme }) => {
 				</div>
 				<div
 					className={`absolute duration-300 ease-linear ${
-						menuOpen ? "left-0" : "left-[-100vh]"
+						menuOpen ? "left-0" : "left-[-100vw]"
 					}`}
 				>
 					<label
 						htmlFor="my-drawer-3"
 						className="drawer-overlay"
 					></label>
-					<ul className="menu p-4 overflow-y-auto w-80 font-bold h-screen  backdrop-blur-[18px] bg-gray-800/60 dark:bg-red-800">
+					<ul className="menu p-4 overflow-y-auto w-80 font-bold h-screen  backdrop-blur-[18px]  bg-gray-800/60">
 						{navItems}
 					</ul>
 				</div>
