@@ -2,6 +2,7 @@ import React from "react"
 import ButtonPrimary from "../../Components/ButtonPrimary"
 import doctor from "../../assets/images/doctor-small.png"
 import appoinmentsbg from "../../assets/images/appointment.png"
+import Modal from "../Appointments/Modal"
 
 const Appoinments = () => {
 	return (
@@ -12,15 +13,15 @@ const Appoinments = () => {
 		>
 			<div className=" flex mt-40 flex-col lg:flex-row justify-center items-center px-6 mx-auto container">
 				<div className="flex-1 hidden lg:flex justify-end items-end">
-					<img
-						className="mt-[-100px] max-w-lg"
-						src={doctor}
-						alt=""
-					/>
+					<img className="mt-[-100px] max-w-lg" src={doctor} alt="" />
 				</div>
 				<div className="flex-1 flex flex-col justify-center py-8 items-start">
-					<p className="text-secondary text-xl font-bold">Appointment</p>
-					<p className="text-4xl text-white font-bold">Make an appointment Today</p>
+					<p className="text-secondary text-xl font-bold">
+						Appointment
+					</p>
+					<p className="text-4xl text-white font-bold">
+						Make an appointment Today
+					</p>
 					<p className="text-white mb-4">
 						It is a long established fact that a reader will be
 						distracted by the readable content of a page when

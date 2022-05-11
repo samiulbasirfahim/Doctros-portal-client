@@ -1,10 +1,9 @@
 import React from "react"
-import ButtonPrimary from "../../Components/ButtonPrimary"
 
-const Appoinment = ({ service: { name, slots } }) => {
+const Appoinment = ({ service: { name, slots }, setModalService, service }) => {
 	return (
-		<div class="card-body shadow-xl rounded-2xl bg-base-100">
-			<h2 class="text-secondary font-bold text-center text-2xl w-full">
+		<div className="card-body shadow-xl rounded-2xl bg-base-100">
+			<h2 className="text-secondary font-bold text-center text-2xl w-full">
 				{name}
 			</h2>
 			{slots.length > 0 ? (
@@ -18,12 +17,14 @@ const Appoinment = ({ service: { name, slots } }) => {
 				{slots.length} {slots.length > 1 ? "spaces" : "space"} available
 			</p>
 			<div className="flex justify-center w-full">
-				<button
+				<label
 					disabled={!slots.length > 0}
-					class={`btn btn-primary bg-gradient-to-l from-primary to-secondary`}
+					htmlFor="my-modal-6"
+					onClick={() => setModalService(service)}
+					className="btn btn-primary bg-gradient-to-l from-primary to-secondary text-white"
 				>
-					Book appointment
-				</button>
+					{slots.length === 0 ? 'not available' : 'Book now'}
+				</label>
 			</div>
 		</div>
 	)
