@@ -9,12 +9,12 @@ import { useScrollTracker } from "react-scroll-tracker"
 const Navbar = ({ handleThemeChange, theme }) => {
 	const [user] = useAuthState(auth)
 	const { scrollY: scrollYT } = useScrollTracker()
-
-	const [scrollY, setScrollY] = useState()
-	console.log(scrollY)
+	const [scrollY, setScrollY] = useState(0)
 	useEffect(() => {
 		setScrollY(window.scrollY)
+		console.log()
 	}, [scrollYT])
+
 	const [menuOpen, setMenuOpen] = useState(false)
 	const navItems = (
 		<>
@@ -114,11 +114,16 @@ const Navbar = ({ handleThemeChange, theme }) => {
 			<div className="fixed top-0 w-full z-50">
 				<input type="checkbox" className="drawer-toggle" />
 				<div
-					className={`drawer-content flex flex-col h-[64px] backdrop-blur-[18px] bg-gray-800/60  ${
-						scrollY < 300 && "lg:bg-transparent"
+					className={`drawer-content flex flex-col h-[64px] backdrop-blur-[26px] shadow-2xl  ${
+						scrollY < 300 && "lg:bg-transparent shadow-none"
 					}`}
 				>
 					<div className="w-full navbar container  mx-auto">
+						<div className="flex-1 px-2 mx-2">
+							<p className="font-bold text-center lg:text-left lg:w-auto w-full text-2xl">
+								Doctors Portal
+							</p>
+						</div>
 						<div className="flex-none lg:hidden">
 							<label
 								htmlFor="my-drawer-3"
@@ -140,11 +145,7 @@ const Navbar = ({ handleThemeChange, theme }) => {
 								</svg>
 							</label>
 						</div>
-						<div className="flex-1 px-2 mx-2">
-							<p className="font-bold text-center lg:text-left lg:w-auto w-full text-2xl">
-								Doctors Portal
-							</p>
-						</div>
+
 						<div className="flex-none hidden lg:block">
 							<ul className="menu menu-horizontal font-bold">
 								{navItems}
@@ -154,7 +155,7 @@ const Navbar = ({ handleThemeChange, theme }) => {
 				</div>
 				<div
 					className={`absolute duration-300 ease-linear ${
-						menuOpen ? "left-0" : "left-[-100vw]"
+						menuOpen ? "right-0" : "right-[-100vw]"
 					}`}
 				>
 					<label

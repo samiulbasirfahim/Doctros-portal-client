@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import AnimatedCursor from "react-animated-cursor"
 import { Toaster } from "react-hot-toast"
 import { Route, Routes } from "react-router-dom"
+import RequireAuth from "./Components/RequireAuth"
 import Appointments from "./Pages/Appointments/Appointments"
 import Home from "./Pages/Home/Home"
 import Login from "./Pages/Login/Login"
@@ -11,29 +12,39 @@ import Footer from "./Shared/Footer"
 import Navbar from "./Shared/Navbar"
 
 function App() {
-	const [theme, setTheme] = useState(false)
-	useEffect(() => {
-		setTheme(JSON.parse(window.localStorage.getItem("theme")))
-	}, [])
-
+	const [theme, setTheme] = useState(
+		JSON.parse(window.localStorage.getItem("darkTheme"))
+	)
 	const handleThemeChange = () => {
 		setTheme(!theme)
-		window.localStorage.setItem("theme",!theme)
+		window.localStorage.setItem("darkTheme", !theme)
 	}
 
+	useEffect(() => {
+		console.log(window.appv)
+	}, [])
+
 	return (
-		<section data-theme={theme && "dark"}>
-			 <AnimatedCursor />
+		<section data-theme={theme && "night"}>
+			<AnimatedCursor />
+
 			<Navbar handleThemeChange={handleThemeChange} theme={theme} />
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/appointment" element={<Appointments />} />
+				<Route
+					path="/appointment"
+					element={
+						<RequireAuth>
+							<Appointments />
+						</RequireAuth>
+					}
+				/>
 				<Route path="/login" element={<Login />} />
 				<Route path="/sign-up" element={<SignUp />} />
 				<Route path="/reset-password" element={<ResetPassword />} />
 			</Routes>
 			<Footer />
-		<Toaster/>
+			<Toaster />
 		</section>
 	)
 }

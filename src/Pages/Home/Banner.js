@@ -1,16 +1,14 @@
 import React from "react"
 import chair from "../../assets/images/chair.png"
 import ButtonPrimary from "../../Components/ButtonPrimary"
-import bannerBg from "../../assets/images/bg.png"
+
 
 const Banner = () => {
 	return (
 		<section>
 			<div
-				className="hero min-h-screen bg-cover bg-center bg-blend-overlay pt-[100px`]"
-				style={{
-					background: `url(${bannerBg})`,
-				}}
+				className={`hero min-h-screen bg-cover bg-center bg-blend-overlay pt-[100px] lg:bg-[url(https://i.ibb.co/Pwy9dBL/bg.png)]`}
+				
 			>
 				<div className="hero-content flex-col lg:flex-row-reverse">
 					<img

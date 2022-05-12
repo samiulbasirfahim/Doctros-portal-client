@@ -7,15 +7,12 @@ const AppointmentsBanner = ({ setDate, date }) => {
 	return (
 		<section>
 			<div
-				className="hero min-h-screen bg-cover bg-center bg-blend-overlay pt-[100px`]"
-				style={{
-					background: `url(${bannerBg})`,
-				}}
+				className={`hero min-h-screen just bg-cover bg-center bg-blend-overlay pt-[100px] lg:bg-[url(https://i.ibb.co/Pwy9dBL/bg.png)]`}
 			>
-				<div className="hero-content lg:w-1/2 justify-between flex-col lg:flex-row-reverse">
+				<div className="hero-content flex-col lg:flex-row-reverse justify-between">
 					<img
 						src={chair}
-						className={`max-w-xs lg:max-w-2xl rounded-lg`}
+						className={`lg:max-w-lg max-w-xs rounded-lg`}
 						alt=""
 					/>
 					<div>

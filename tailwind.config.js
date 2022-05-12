@@ -1,5 +1,6 @@
 module.exports = {
 	content: ["./src/**/*.{js,jsx,ts,tsx}"],
+	darkMode: 'class',
 	theme: {
 		extend: {},
 	},
@@ -15,7 +16,7 @@ module.exports = {
 					"base-100": "#ffffff",
 				},
 			},
-			"dark",
+			"night",
 		],
 	},
 }
