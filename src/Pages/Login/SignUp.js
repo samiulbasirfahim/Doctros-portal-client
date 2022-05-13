@@ -23,7 +23,7 @@ const SignUp = () => {
 	const onSubmit = (data) => {
 		createUserWithEmailAndPassword(data.email, data.password).then(() => {
 			updateProfile({ displayName: data.name })
-		})
+		}).then()
 	}
 
 	const [user] = useAuthState(auth)

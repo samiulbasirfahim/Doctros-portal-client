@@ -1,5 +1,7 @@
 import { format } from "date-fns"
 import React from "react"
+import { useAuthState } from "react-firebase-hooks/auth"
+import auth from "../../firebase.init"
 
 const Modal = ({
 	modalService: { name, slots = [] },
@@ -7,6 +9,7 @@ const Modal = ({
 	setModalService,
 	modalService,
 }) => {
+	const [user, loading] = useAuthState(auth)
 	const handleModalService = (event) => {
 		event.preventDefault()
 
@@ -31,11 +34,33 @@ const Modal = ({
 						onSubmit={handleModalService}
 						className="grid grid-cols-1 gap-y-4"
 					>
+						<p>
+							<input
+								type="text"
+								readOnly
+								name="date"
+								id="date"
+								disabled
+								value={format(date, "PP")}
+								className="input input-bordered w-full"
+							/>
+						</p>
 						<input
 							type="text"
-							readOnly
+							name="name"
+							id="name"
+							placeholder="Full name"
+							defaultValue={user.displayName}
 							disabled
-							value={format(date, "PP")}
+							className="input input-bordered w-full"
+						/>
+						<input
+							type="text"
+							name="userEmail"
+							id="userEmail"
+							defaultValue={user.email}
+							disabled
+							placeholder="Email"
 							className="input input-bordered w-full"
 						/>
 						<select
@@ -48,17 +73,9 @@ const Modal = ({
 						</select>
 						<input
 							type="text"
-							placeholder="Full name"
-							className="input input-bordered w-full"
-						/>
-						<input
-							type="text"
+							name="phoneNumber"
+							id="phoneNumber"
 							placeholder="Phone number"
-							className="input input-bordered w-full"
-						/>
-						<input
-							type="text"
-							placeholder="Email"
 							className="input input-bordered w-full"
 						/>
 						<input

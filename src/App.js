@@ -26,9 +26,7 @@ function App() {
 
 	return (
 		<section data-theme={theme && "night"}>
-			<AnimatedCursor />
-
-			<Navbar handleThemeChange={handleThemeChange} theme={theme} />
+		``	<Navbar handleThemeChange={handleThemeChange} theme={theme} />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route

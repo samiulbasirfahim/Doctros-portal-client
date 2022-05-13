@@ -1,15 +1,16 @@
 import { format } from "date-fns"
 import React, { useEffect, useState } from "react"
+import Spinner from "../../Components/Spinner"
 import Appoinment from "./Appoinment"
 import Modal from "./Modal"
 
 const AvailableAppointments = ({ date }) => {
-	const [services, setServices] = useState([])
+	const [treatments, setTreatments] = useState(null)
 	const [modalService, setModalService] = useState(null)
 	useEffect(() => {
-		fetch("http://localhost:4000/services")
+		fetch("http://localhost:4000/treatment")
 			.then((res) => res.json())
-			.then((data) => setServices(data))
+			.then((data) => setTreatments(data))
 	}, [])
 	return (
 		<section>
@@ -17,15 +18,16 @@ const AvailableAppointments = ({ date }) => {
 				Available Appointments on {format(date, "PP")}
 			</p>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-				{services.map((service) => (
+				{treatments && treatments.map((treatment) => (
 					<Appoinment
-						key={service._id}
+						key={treatment._id}
 						setModalService={setModalService}
-						service={service}
+						service={treatment}
 					/>
 				))}
 			</div>
-			{services.length === 0 && (
+			{isNaN(treatments) && <Spinner />}
+			{treatments && treatments.length === 0 && (
 				<p className="text-red-600 text-center w-full">
 					No service available for now
 				</p>
