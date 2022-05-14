@@ -8,12 +8,27 @@ const Modal = ({
 	date,
 	setModalService,
 	modalService,
+	refetch,
 }) => {
-	const [user, loading] = useAuthState(auth)
+	const [user] = useAuthState(auth)
 	const handleModalService = (event) => {
 		event.preventDefault()
-
-		console.log(date)
+		const bookingInfo = {
+			treatment: name,
+			name: user.displayName,
+			email: user.email,
+			slot: event.target.slot.value,
+			date: format(date, "PP"),
+			phoneNumber: event.target.phoneNumber.value,
+		}
+		fetch("http://localhost:4000/booking", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(bookingInfo),
+		})
+		refetch()
 		setModalService(null)
 	}
 	return (
@@ -65,6 +80,7 @@ const Modal = ({
 						/>
 						<select
 							type="text"
+							name="slot"
 							className="input input-bordered w-full"
 						>
 							{slots.map((slot, index) => (

@@ -162,7 +162,7 @@ const Navbar = ({ handleThemeChange, theme }) => {
 						htmlFor="my-drawer-3"
 						className="drawer-overlay"
 					></label>
-					<ul className="menu p-4 overflow-y-auto w-80 font-bold h-screen  backdrop-blur-[18px]  bg-gray-800/60">
+					<ul className="menu p-4 overflow-y-auto w-80 font-bold h-screen  backdrop-blur-[18px]  bg-gray-400/60">
 						{navItems}
 					</ul>
 				</div>
