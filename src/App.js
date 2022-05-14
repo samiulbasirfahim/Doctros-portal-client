@@ -4,6 +4,8 @@ import { Toaster } from "react-hot-toast"
 import { Route, Routes } from "react-router-dom"
 import RequireAuth from "./Components/RequireAuth"
 import Appointments from "./Pages/Appointments/Appointments"
+import Dashboard from "./Pages/Dashboard/Dashboard"
+import MyAppoinments from "./Pages/Dashboard/MyAppoinments"
 import Home from "./Pages/Home/Home"
 import Login from "./Pages/Login/Login"
 import ResetPassword from "./Pages/Login/ResetPassword"
@@ -26,7 +28,7 @@ function App() {
 
 	return (
 		<section data-theme={theme && "night"}>
-		``	<Navbar handleThemeChange={handleThemeChange} theme={theme} />
+			`` <Navbar handleThemeChange={handleThemeChange} theme={theme} />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route
@@ -37,6 +39,17 @@ function App() {
 						</RequireAuth>
 					}
 				/>
+				<Route
+					path="/dashboard"
+					element={
+						<RequireAuth>
+							<Dashboard />
+						</RequireAuth>
+					}
+				>
+					<Route index element={<MyAppoinments />}></Route>
+					<Route path="reviews" ></Route>
+				</Route>
 				<Route path="/login" element={<Login />} />
 				<Route path="/sign-up" element={<SignUp />} />
 				<Route path="/reset-password" element={<ResetPassword />} />

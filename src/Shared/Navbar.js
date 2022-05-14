@@ -78,14 +78,20 @@ const Navbar = ({ handleThemeChange, theme }) => {
 					Contact Us
 				</NavLink>
 			</li>
-			<li>
-				<button
-					onClick={handleThemeChange}
-					className="rounded-2xl lg:mx-2 font-bold"
-				>
-					{theme ? <FaMoon /> : <FaSun />}
-				</button>
-			</li>
+			{user && (
+				<li>
+					<NavLink
+						className={({ isActive }) =>
+							isActive
+								? "bg-accent text-white rounded-2xl"
+								: "rounded-2xl lg:mx-2"
+						}
+						to="/dashboard"
+					>
+						Dashboard
+					</NavLink>
+				</li>
+			)}
 			<li>
 				{user ? (
 					<button
@@ -106,6 +112,15 @@ const Navbar = ({ handleThemeChange, theme }) => {
 						Login
 					</NavLink>
 				)}
+			</li>
+
+			<li>
+				<button
+					onClick={handleThemeChange}
+					className="rounded-2xl lg:mx-2 font-bold"
+				>
+					{theme ? <FaMoon /> : <FaSun />}
+				</button>
 			</li>
 		</>
 	)
