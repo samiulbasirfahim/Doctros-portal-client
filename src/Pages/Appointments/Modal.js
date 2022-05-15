@@ -25,6 +25,8 @@ const Modal = ({
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				email: user.email,
+				authorization: "Bearer " + localStorage.getItem("accesToken"),
 			},
 			body: JSON.stringify(bookingInfo),
 		})

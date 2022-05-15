@@ -1,11 +1,17 @@
 import { format } from "date-fns"
-import React, { useEffect, useState } from "react"
+import { signOut } from "firebase/auth"
+import React, { useState } from "react"
+import { useAuthState } from "react-firebase-hooks/auth"
 import { useQuery } from "react-query"
+import { useNavigate } from "react-router-dom"
 import Spinner from "../../Components/Spinner"
+import auth from "../../firebase.init"
 import Appoinment from "./Appoinment"
 import Modal from "./Modal"
 
 const AvailableAppointments = ({ date }) => {
+	const navigate = useNavigate()
+	const [user] = useAuthState(auth)
 	// const [treatments, setTreatments] = useState([])
 	const [modalService, setModalService] = useState(null)
 	const {
@@ -13,12 +19,25 @@ const AvailableAppointments = ({ date }) => {
 		isLoading,
 		refetch,
 	} = useQuery(["treatments", date], () =>
-		fetch(
-			`http://localhost:4000/available?date=${format(date, "PP")}`
-		).then((res) => res.json())
+		fetch(`http://localhost:4000/available?date=${format(date, "PP")}`, {
+			headers: {
+				"Content-Type": "application",
+				authorization: "Bearer " + localStorage.getItem("accesToken"),
+				email: user.email,
+			},
+		}).then((res) => {
+			if (res.status === 401 || res.status === 403) {
+				signOut(auth)
+				navigate("/login")
+			}
+			return res.json()
+		})
 	)
 
 	console.log(treatments)
+	if (isLoading) {
+		return <Spinner />
+	}
 	return (
 		<section>
 			<p className="text-secondary text-center lg:text-xl text-sm my-10">
@@ -34,7 +53,7 @@ const AvailableAppointments = ({ date }) => {
 						/>
 					))}
 			</div>
-			{isLoading && <Spinner />}
+
 			{modalService && (
 				<Modal
 					refetch={refetch}

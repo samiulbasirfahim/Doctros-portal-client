@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
-import AnimatedCursor from "react-animated-cursor"
+import { useAuthState } from "react-firebase-hooks/auth"
 import { Toaster } from "react-hot-toast"
 import { Route, Routes } from "react-router-dom"
 import RequireAuth from "./Components/RequireAuth"
+import auth from "./firebase.init"
 import Appointments from "./Pages/Appointments/Appointments"
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import MyAppoinments from "./Pages/Dashboard/MyAppoinments"
+import Users from "./Pages/Dashboard/Users"
 import Home from "./Pages/Home/Home"
 import Login from "./Pages/Login/Login"
 import ResetPassword from "./Pages/Login/ResetPassword"
@@ -22,9 +24,29 @@ function App() {
 		window.localStorage.setItem("darkTheme", !theme)
 	}
 
+	const [user] = useAuthState(auth)
+	const [isAdmin, setIsAdmin] = useState(false)
+
 	useEffect(() => {
-		console.log(window.appv)
-	}, [])
+		if (user) {
+			fetch("http://localhost:4000/user/" + user.email, {
+				headers: {
+					authorization:
+						"Bearer " + localStorage.getItem("accesToken"),
+					email: user.email,
+				},
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					console.log(data)
+					if (data.role === "admin") {
+						setIsAdmin(true)
+					} else {
+						setIsAdmin(false)
+					}
+				})
+		}
+	}, [user])
 
 	return (
 		<section data-theme={theme && "night"}>
@@ -48,7 +70,9 @@ function App() {
 					}
 				>
 					<Route index element={<MyAppoinments />}></Route>
-					<Route path="reviews" ></Route>
+					{isAdmin && (
+						<Route path="users" element={<Users />}></Route>
+					)}
 				</Route>
 				<Route path="/login" element={<Login />} />
 				<Route path="/sign-up" element={<SignUp />} />

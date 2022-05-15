@@ -6,6 +6,7 @@ import auth from "../../firebase.init"
 import SocialLogin from "./SocialLogin"
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth"
 import Spinner from "../../Components/Spinner"
+import useToken from "../../hooks/useToken"
 
 const Login = () => {
 	const [showPass, setShowPass] = useState(false)
@@ -26,7 +27,8 @@ const Login = () => {
 	const location = useLocation()
 	const from = location?.state?.from || "/"
 	const navigate = useNavigate()
-	if (user) {
+	const [token] = useToken(user)
+	if (token) {
 		navigate(from, { replace: true })
 	}
 
@@ -87,7 +89,10 @@ const Login = () => {
 							<small>{errors?.password?.message}</small>
 						</p>
 					</p>
-					<Link to="/reset-password" className="text-xs text-secondary">
+					<Link
+						to="/reset-password"
+						className="text-xs text-secondary"
+					>
 						Forget password ?
 					</Link>
 					<input type="submit" value="Login" className="btn w-full" />

@@ -8,11 +8,12 @@ import { useForm } from "react-hook-form"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import Spinner from "../../Components/Spinner"
 import auth from "../../firebase.init"
+import useToken from "../../hooks/useToken"
 import SocialLogin from "./SocialLogin"
 
 const SignUp = () => {
 	const [showPass, setShowPass] = useState(false)
-	const [createUserWithEmailAndPassword,  , loading, error] =
+	const [createUserWithEmailAndPassword, , loading, error] =
 		useCreateUserWithEmailAndPassword(auth)
 	const [updateProfile, updating] = useUpdateProfile(auth)
 	const {
@@ -23,14 +24,15 @@ const SignUp = () => {
 	const onSubmit = (data) => {
 		createUserWithEmailAndPassword(data.email, data.password).then(() => {
 			updateProfile({ displayName: data.name })
-		}).then()
+		}).then(() => console.log(data.name))
 	}
 
 	const [user] = useAuthState(auth)
 	const location = useLocation()
 	const from = location?.state?.from || "/"
 	const navigate = useNavigate()
-	if (user) {
+	const [token] = useToken(user)
+	if (token) {
 		navigate(from, { replace: true })
 	}
 	return (
@@ -121,7 +123,11 @@ const SignUp = () => {
 				</form>
 				<p className="text-sm text-center mt-2">
 					Already have an account ?
-					<Link to="/login" state={from} className="text-sm text-secondary ml-2">
+					<Link
+						to="/login"
+						state={from}
+						className="text-sm text-secondary ml-2"
+					>
 						Please login
 					</Link>
 				</p>

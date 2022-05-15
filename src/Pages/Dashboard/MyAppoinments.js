@@ -6,7 +6,12 @@ const MyAppoinments = () => {
 	const [myAppoinments, setAppoinments] = useState([])
 	const [user] = useAuthState(auth)
 	useEffect(() => {
-		fetch(`http://localhost:4000/my-appointments?email=${user.email}`)
+		fetch(`http://localhost:4000/my-appointments?email=${user.email}`, {
+			headers: {
+				email: user.email,
+				authorization: "Bearer " + localStorage.getItem("accesToken"),
+			},
+		})
 			.then((response) => response.json())
 			.then((data) => setAppoinments(data))
 	}, [])
@@ -28,10 +33,18 @@ const MyAppoinments = () => {
 							return (
 								<tr>
 									<th>{index + 1}</th>
-									<td className="font-semibold text-primary">{a.name}</td>
-									<td className="text-purple-600 font-semibold">{a.date}</td>
-									<td className="text-green-600 font-semibold">{a.slot}</td>
-									<td className="font-semibold text-secondary">{a.treatment}</td>
+									<td className="font-semibold text-primary">
+										{a.name}
+									</td>
+									<td className="text-purple-600 font-semibold">
+										{a.date}
+									</td>
+									<td className="text-green-600 font-semibold">
+										{a.slot}
+									</td>
+									<td className="font-semibold text-secondary">
+										{a.treatment}
+									</td>
 								</tr>
 							)
 						})}

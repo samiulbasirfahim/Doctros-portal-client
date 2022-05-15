@@ -1,7 +1,30 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+import { useAuthState } from "react-firebase-hooks/auth"
 import { Link, NavLink, Outlet } from "react-router-dom"
+import auth from "../../firebase.init"
 
 const Dashboard = () => {
+	const [user] = useAuthState(auth)
+	const [isAdmin, setIsAdmin] = useState(false)
+
+	useEffect(() => {
+		if (user) {
+			fetch("http://localhost:4000/user/" + user.email, {
+				email: user.email,
+				authorization: "Bearer " + localStorage.getItem("accesToken"),
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					console.log(data)
+					if (data.role === "admin") {
+						setIsAdmin(true)
+					} else {
+						setIsAdmin(false)
+					}
+				})
+		}
+	}, [user])
+
 	return (
 		<div>
 			<div class="drawer drawer-mobile">
@@ -44,9 +67,11 @@ const Dashboard = () => {
 						<li>
 							<Link to={"/dashboard"}>Appointments</Link>
 						</li>
-						<li>
-							<Link to={"/dashboard/reviews"}>Reviews</Link>
-						</li>
+						{isAdmin && (
+							<li>
+								<Link to={"/dashboard/users"}>users</Link>
+							</li>
+						)}
 					</ul>
 				</div>
 			</div>
