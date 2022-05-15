@@ -6,7 +6,7 @@ const MyAppoinments = () => {
 	const [myAppoinments, setAppoinments] = useState([])
 	const [user] = useAuthState(auth)
 	useEffect(() => {
-		fetch(`http://localhost:4000/my-appointments?email=${user.email}`, {
+		fetch(`https://doctors-portal-fahim.herokuapp.com/my-appointments?email=${user.email}`, {
 			headers: {
 				email: user.email,
 				authorization: "Bearer " + localStorage.getItem("accesToken"),

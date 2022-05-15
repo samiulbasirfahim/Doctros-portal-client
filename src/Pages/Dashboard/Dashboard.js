@@ -9,7 +9,7 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		if (user) {
-			fetch("http://localhost:4000/user/" + user.email, {
+			fetch("https://doctors-portal-fahim.herokuapp.com/user/" + user.email, {
 				email: user.email,
 				authorization: "Bearer " + localStorage.getItem("accesToken"),
 			})

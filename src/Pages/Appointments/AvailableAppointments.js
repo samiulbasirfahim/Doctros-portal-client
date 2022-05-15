@@ -19,7 +19,7 @@ const AvailableAppointments = ({ date }) => {
 		isLoading,
 		refetch,
 	} = useQuery(["treatments", date], () =>
-		fetch(`http://localhost:4000/available?date=${format(date, "PP")}`, {
+		fetch(`https://doctors-portal-fahim.herokuapp.com/available?date=${format(date, "PP")}`, {
 			headers: {
 				"Content-Type": "application",
 				authorization: "Bearer " + localStorage.getItem("accesToken"),

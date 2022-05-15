@@ -12,7 +12,7 @@ const Users = () => {
 		refetch,
 		data: users,
 	} = useQuery("repoData", () =>
-		fetch("http://localhost:4000/user", {
+		fetch("https://doctors-portal-fahim.herokuapp.com/user", {
 			headers: {
 				authorization: "Bearer " + localStorage.getItem("accesToken"),
 				email: user.email,
@@ -21,7 +21,7 @@ const Users = () => {
 	)
 
 	const makeAdmin = (email) => {
-		fetch("http://localhost:4000/admin/" + email, {
+		fetch("https://doctors-portal-fahim.herokuapp.com/admin/" + email, {
 			headers: {
 				"content-type": "application/json",
 				email: user.email,
@@ -41,7 +41,7 @@ const Users = () => {
 	}
 
 	const removeAdmin = (email) => {
-		fetch("http://localhost:4000/admin-remove/" + email, {
+		fetch("https://doctors-portal-fahim.herokuapp.com/admin-remove/" + email, {
 			headers: {
 				"content-type": "application/json",
 				email: user.email,

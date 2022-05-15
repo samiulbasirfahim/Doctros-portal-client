@@ -5,7 +5,7 @@ const useToken = (user) => {
 	console.log(user)
 	useEffect(() => {
 		if (user) {
-			fetch("http://localhost:4000/user", {
+			fetch("https://doctors-portal-fahim.herokuapp.com/user", {
 				method: "put",
 				headers: {
 					"content-type": "application/json",

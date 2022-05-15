@@ -21,7 +21,7 @@ const Modal = ({
 			date: format(date, "PP"),
 			phoneNumber: event.target.phoneNumber.value,
 		}
-		fetch("http://localhost:4000/booking", {
+		fetch("https://doctors-portal-fahim.herokuapp.com/booking", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
